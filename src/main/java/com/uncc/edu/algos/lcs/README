@@ -1,0 +1,50 @@
+Compiler and steps to run
+
+	To compile and run this program use JDK. Follow these steps:
+		1. javac Driver.java
+		2. java Driver inputFileName1 inputFileName2 outputFileName
+		eg. java Driver C:/examples/example1a.txt C:/examples/example1b.txt C:/examples/op1.txt
+
+Design, breakdown & data structures
+
+	1. Driver :
+		The Driver class takes the 1st two command line arguments to read the input sequences in a character array.
+		It then passes this character array to the 3 classes implementing different algorithms and gets the result back.
+		It then writes the 3 results into the file specified in 3rd command line argument.
+		
+		Data Structures used :
+			- char[] seqOne : Stores the sequence from 1st file which is aligned down the left of the edit distance matrix
+			- char[] seqTwo : Stores the sequence from 2nd file which is aligned across the top of the edit distance matrix
+	
+	2. NormalizedEditDistance :
+		This class calculates the Normalized Edit Distance between the two sequences passed to it by the Driver using the only 2 row matrix.
+		
+		Data Structures used :
+			- int[][] editDistTable : Its a matrix with two rows which is used to compute the edit distance table row by row by referring to just the previous computed row.
+									  number of rows of matrix = 2 & number of columns of matrix = number of characters in seq2 + 1
+									  A variable currentIndex keeps track of which current row in matrix is being computed 0 or 1.
+		
+	3. LongestCommonSequence :
+		This class finds the longest common sequence between the two sequences passed to it by the Driver using the entire table.
+		
+		Data Structures used :
+			- int[][] editDistTable : Its a matrix which is used to store the whole edit distance table.
+									  number of rows of matrix = number of characters in seq1 + 1 & number of columns of matrix = number of characters in seq2 + 1
+			- Stack<Character> lcsStack : Its a Stack which stores the symbols to be added to lcs
+		
+		
+	4. LongestCommonSequence :
+		This class finds the longest common sequence between the two sequences passed to it by the Driver using recursive linear memory algorithm.
+		
+		Data Structures used :
+			- int[][] editDistTableTop : Its a matrix with two rows which is used to compute the top half part of edit distance table row by row by referring to just the previous computed row.
+										 number of rows of matrix = 2 & number of columns of matrix = number of characters in seq2 + 1
+										 A variable currentIndexTop keeps track of which current row in matrix is being computed 0 or 1.
+			- int[][] editDistTableBottom : Its a matrix with two rows which is used to compute the bottom half part of edit distance table row by row by referring to just the previous computed row.
+											number of rows of matrix = 2 & number of columns of matrix = number of characters in seq2 + 1
+											A variable currentIndexBottom keeps track of which current row in matrix is being computed 0 or 1.
+	
+	5. Util: This class has a function to print a matrix
+
+The Program prints the initial, intermediate & final values of all the matrices.
+The program runs successfully for any combination of characters, numbers, special characters given as input sequences.

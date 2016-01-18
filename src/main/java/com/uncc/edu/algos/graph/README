@@ -1,0 +1,52 @@
+Compiler and steps to run
+
+To compile and run this program use JDK 1.8. Follow these steps:
+	1. javac Graph.java
+	2. java Graph inputFileName
+	eg. java Graph C:/examples/network.txt
+
+Design, breakdown & data structures
+
+	1. Graph :
+		The Driver class takes one command line argument to read the graph information.
+		It then prompts the user for queries validates the query and then calls respective functions on graph to execute the query.
+		- print : printGraph()
+		- reachable : printReachable() 
+		- vertexup : changeVertexStatus(vertexName, true)
+		- vertexdown : changeVertexStatus(vertexName, false)
+		- edgeup : changeEdgeStatus(sourceName, destinationName, true)
+		- edgedown : changeEdgeStatus(sourceName, destinationName, false)
+		- path : runDijkstrasAlgo(sourceName), printPath(destinationName)
+		- addedge : addDirectedEdge(sourceName, destinationName, weight)
+		- deleteedge : removeEdge(sourceName, destinationName)
+		- quit
+		The outputs if any are sent to the console.
+		
+		Data Structures used :
+			- Map<String, Vertex> vertexMap : Stores all the vertices in graph. Key is vertex name and value is the actual vertex.
+	
+	2. Vertex :
+		This class represents the vertex of a graph.
+		
+		Data Structures used :
+			- Map<String, Edge> adj : Its a map that stores the information of adjacent edges. Key is the destination vertex Name and value is the adjacent Edge.
+		
+	3. Edge :
+		This class represents the edge of a graph.
+		
+		Data Structures used :
+			- Vertex destinationVertex : Stores the destination vertex of graph.
+		
+	4. MinQueue :
+		This class provides Min Heap implementation which is used by Dijkstras Algorithm.
+		
+		Data Structures used :
+			- List<Vertex> vertexs : List of elements in the Min Heap.
+	
+	5. Status : Enumeration with UP and DOWN values.
+
+	6. Constants : Contains the INFINITY constant used by Dijkstras Algorithm for INFINITY check.
+
+The Program runs successfully for all input queries.
+Since we are using floating point numbers for weights of the edges due to the bug mentioned in the below link the distance that gets calculated is not always precise.
+http://stackoverflow.com/questions/1661273/floating-point-arithmetic-not-producing-exact-results
